@@ -1,0 +1,13 @@
+bin = [
+    { name = "apr13", path = "/Users/jeffrey/Projects/rust/src/apr13/main.rs" },
+    { name = "apr12", path = "/Users/jeffrey/Projects/rust/src/apr12/main.rs" },
+    { name = "apr11", path = "/Users/jeffrey/Projects/rust/src/apr11/main.rs" },
+]
+
+[package]
+name = "RustLeetcode"
+version = "1.0.0"
+author = "Jeffrey Qian <jeffreyqdd@gmail.com>"
+
+[dependencies]
+bencher = "0.1.5"
