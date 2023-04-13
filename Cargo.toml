@@ -1,8 +1,10 @@
-bin = [
-    { name = "apr13", path = "/Users/jeffrey/Projects/rust/src/apr13/main.rs" },
-    { name = "apr12", path = "/Users/jeffrey/Projects/rust/src/apr12/main.rs" },
-    { name = "apr11", path = "/Users/jeffrey/Projects/rust/src/apr11/main.rs" },
-]
+[[bin]]
+name = "2390"
+path = "/home/jeffrey/Projects/RustLeet/src/2390/main.rs"
+
+[[bin]]
+name = "71"
+path = "/home/jeffrey/Projects/RustLeet/src/71/main.rs"
 
 [package]
 name = "RustLeetcode"

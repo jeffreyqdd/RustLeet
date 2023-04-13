@@ -4,7 +4,7 @@ impl Solution {
     pub fn my_solution(path: String) -> String {
         let output = path
             .split('/')
-            .fold(Vec::with_capacity(100), |mut acc, s| match s {
+            .fold(vec![], |mut acc, s| match s {
                 "." | "" => acc,
                 ".." => {
                     acc.pop();
@@ -23,9 +23,9 @@ impl Solution {
 
 mod testing {
     use super::Solution;
-    use std::time::Instant;
     use std::mem::forget;
     use std::ptr;
+    use std::time::{Duration, Instant};
 
     struct UnitTest<T, E> {
         input: T,
@@ -43,7 +43,11 @@ mod testing {
                 output: "/".to_owned(),
             },
             UnitTest {
-                input: "/hello/world/".to_owned(),
+                input: "/hello/world/".repeat(100).to_owned(),
+                output: "/hello/world".repeat(100).to_owned(),
+            },
+            UnitTest {
+                input: "/hello/world".to_owned(),
                 output: "/hello/world".to_owned(),
             },
         ]
@@ -55,29 +59,38 @@ mod testing {
             assert!(result == i.output);
         }
     }
-    pub fn bench_each(its: u32) {
+    pub fn bench(its: u32) {
         assert!(its > 0);
-        
-        let black_box = |x | {
-            unsafe {
-                let ret = ptr::read_volatile(&x);
-                forget(x);
-                ret
-            }
-        }
 
+        let black_box = |x| unsafe {
+            let ret = ptr::read_volatile(&x);
+            forget(x);
+            ret
+        };
+
+        let mut iteration_cnt = 0;
         for i in all_tests() {
             // do the benchmark
+            let mut duration = Duration::ZERO;
+            iteration_cnt += 1;
+
             for _ in 0..its {
                 let closure = || Solution::my_solution(i.input.clone());
                 let start = Instant::now();
                 black_box(closure());
-                let duration = start.elapsed();
+                duration += start.elapsed();
             }
+            println!(
+                "iteration {} for {} its. Time per it: {:?}",
+                iteration_cnt,
+                its,
+                duration / its
+            );
         }
     }
 }
 
 fn main() {
     testing::assert_pass();
+    testing::bench(100000);
 }

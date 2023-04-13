@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import os
-import tomllib
-import tomli_w
-
+import toml
 import clize
 import subprocess
 import shutil
@@ -18,17 +16,17 @@ TEMPLATE_FILE = path_join(BASE_DIR, "template/template.rs")
 
 def configure():
     bins = next(os.walk(SRC_DIR))[1]
-    with open("Cargo copy.toml", 'rb') as f:
-        toml_data = tomllib.load(f)
+    toml_data = toml.load(TOML_FILE)
+
     toml_data['bin'] = [
         {'name' : x, 'path' : path_join(SRC_DIR, f'{x}/main.rs')} for x in bins
     ]
-    with open(TOML_FILE, 'wb') as f:
-        tomli_w.dump(toml_data, f)
+    with open(TOML_FILE, 'w') as f:
+        toml.dump(toml_data, f)
 
 def execute(bin_name : str):
     exit_code = subprocess.call(['cargo', 'build', '--release'])
-    if (exit_code != 0): 
+    if (exit_code != 0):
         return
     os.system('clear')
 
