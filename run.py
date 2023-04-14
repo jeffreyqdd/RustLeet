@@ -14,26 +14,27 @@ SRC_DIR = path_join(BASE_DIR, "src")
 TOML_FILE = path_join(BASE_DIR, "Cargo.toml")
 TEMPLATE_FILE = path_join(BASE_DIR, "template/template.rs")
 
+
 def configure():
     bins = next(os.walk(SRC_DIR))[1]
     toml_data = toml.load(TOML_FILE)
 
     toml_data['bin'] = [
-        {'name' : x, 'path' : path_join(SRC_DIR, f'{x}/main.rs')} for x in bins
+        {'name': x, 'path': path_join(SRC_DIR, f'{x}/main.rs')} for x in bins
     ]
     with open(TOML_FILE, 'w') as f:
         toml.dump(toml_data, f)
 
-def execute(bin_name : str):
+
+def execute(bin_name: str):
     exit_code = subprocess.call(['cargo', 'build', '--release'])
     if (exit_code != 0):
         return
-    os.system('clear')
-
     exit_code = subprocess.call(['cargo', 'run', '--bin', bin_name])
 
-def new(bin_name : str):
-    new_proj_dir = path_join (SRC_DIR, bin_name)
+
+def new(bin_name: str):
+    new_proj_dir = path_join(SRC_DIR, bin_name)
     if os.path.exists(new_proj_dir):
         print(f"path at \"{new_proj_dir}\" already exists")
         return

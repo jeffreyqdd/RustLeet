@@ -1,10 +1,18 @@
 [[bin]]
 name = "2390"
-path = "/home/jeffrey/Projects/RustLeet/src/2390/main.rs"
+path = "/Users/jeffrey/Projects/rust/src/2390/main.rs"
+
+[[bin]]
+name = "946"
+path = "/Users/jeffrey/Projects/rust/src/946/main.rs"
+
+[[bin]]
+name = "516"
+path = "/Users/jeffrey/Projects/rust/src/516/main.rs"
 
 [[bin]]
 name = "71"
-path = "/home/jeffrey/Projects/RustLeet/src/71/main.rs"
+path = "/Users/jeffrey/Projects/rust/src/71/main.rs"
 
 [package]
 name = "RustLeetcode"
