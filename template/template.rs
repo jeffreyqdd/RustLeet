@@ -26,9 +26,12 @@ mod testing {
     }
 
     pub fn assert_pass() {
+        let mut iteration_cnt = 1;
         for i in all_tests() {
             let result = gen_test_closure(&i)();
             assert!(result == i.output);
+            println!("PASSED case {}", iteration_cnt);
+            iteration_cnt += 1;
         }
     }
     pub fn bench(its: u32) {
