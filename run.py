@@ -27,10 +27,8 @@ def configure():
 
 
 def execute(bin_name: str):
-    exit_code = subprocess.call(['cargo', 'build', '--release'])
-    if (exit_code != 0):
-        return
-    exit_code = subprocess.call(['cargo', 'run', '--bin', bin_name])
+    exit_code = subprocess.call(
+        ['cargo', 'run', '--release', '--bin', bin_name])
 
 
 def new(bin_name: str):
